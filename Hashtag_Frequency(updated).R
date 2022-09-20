@@ -142,9 +142,9 @@ UniqueUsers2 <- UniqueUsers2[!duplicated(UniqueUsers2[ , c("user_id_str")]),]
 nrow(UniqueUsers2)
 
 #Top 1000 hashtags divided by the number of unique users in the dataset
-test <- num_data2[2:1010]/ nrow(UniqueUsers2)
+test <- num_data2[1:1000]/ nrow(UniqueUsers2)
 test <- data.frame(test)
-test$Count <- num_data2[2:1010]
+test$Count <- num_data2[1:1000]
 #renaming the new dataframe
 colnames(test) <- c("Hashtags", "Freq", "Count")
 #organizing columns
