@@ -1,0 +1,104 @@
+Truncated - True = shortened/cut off text, False = not shortened/no cut off text
+
+user_created_at = The day the user created their account
+
+extended_tweet_full_text = contains the full length tweet for tweets that are truncated in the text column.
+
+extended_tweet_entities_hashtags = contains all of the hashtags from the tweets that are truncated in the text column.
+
+extended_tweet_entities_user_mentions_screen_name = contains all of the mention screen names from the tweets that are truncated in the text column.
+
+extended_tweet_entities_user_mentions_id_str = contains all of the mention users id_str from the tweets that are truncated in the text column. The id_str of the person mentioned.
+
+
+entities_hashtags = contains all of the hashtags from each tweet, however, if the tweet was truncated then the cut off hashtags do not  show here, they show in the extended_tweet_entities_hashtags column.
+
+entities_user_mentions_screen_name = contains all of the mentioned screen names, however, if the tweet was truncated then the cut off mentions do not show here, they show in the extended_tweet_entities_user_mention_screen_name column.
+
+entities_user_mentions_id_str = contains all of the mentioned users id_str, however, if the tweet was truncated then the cut off id_str does not show here, they show in the extended_tweet_entities_user_mentions_screen_name column.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+retweeted_status_created_at = when the retweet was posted
+
+retweet_status_id_str = the unique number to identify the specific retweet.
+
+retweeted_status_text = contains the text of of the retweet.
+
+retweeted_status_truncated - True = shortened/cut off text, False = not shortened/no cut off text
+
+retweeted_status_in_reply_to_status_id_str = contains the unique number (id_str) which defines the retweet that was in reply to someone.
+
+retweeted_status_in_reply_to_user_id_str = contains the user_id_str of the user in which the retweet was replying to. If someone mentions someone in their tweet then another person retweets it, the original person mentioned will appear in this column.
+
+retweeted_status_user_id_str = contains the user_id_str of the user from which the tweet was retweeted. If someone Retweeted something this column contains the user_id_str of the person they retweeted.
+
+retweeted_status_user_screen_name = contains the screen name of the user from which the tweet was retweeted. If someone retweeted something this column contains the name of the person they retweeted.
+
+retweeted_status_user_description = contains the profile description of the user in which the tweet was retweeted from.
+
+retweeted_status_user_verified = contains the verified  status of the account from which the tweet was retweeted.
+
+retweeted_status_user_followers_count = contains the follower count of the account from which the tweet was retweeted.
+
+retweeted_status_user_friends_count = contains the friends count of the account from which the tweet was retweeted.
+
+retweteed_status_user_favorites_count = contains the favorties count of the account from which the tweet was retweeted.
+
+retweeted_status_user_statuses_count = contains the number of statuses count of the account from which the tweet was retweeted.
+
+retweeted_status_user_created_at = contains the date in which the account from which the tweet was retweeted was created.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+retweeted_status_extended_tweet_full_text = retweeted status full text, if truncated = True in the retweeted_status_truncated column then the full text will appear in this column.
+
+retweeted_status_extended_tweet_entities_hashtags = retweeted status full text hashtags, if truncated = True in the retweeted_status_truncated column then all of the hashtags will appear in this column.
+
+retweeted_status_extended_tweet_entities_user_mentions_screen_name = Contains the screen names of users mentioned that were cut off from truncation.
+
+retweeted_status_extended_tweet_entities_user_mentions_id_str = Contains the id_str of the users mentioned that were cut off from truncation.
+
+retweeted_status_entities_hashtags = Contains all of the hashtags that were not truncated, if the text was truncated the cut off hashtags will not show here, only the hashtags that were within the 140 character limit show here.
+
+retweeted_status_entities_user_mentions_screen_name = Contains the screen names of users mentioned that were not cut off from truncation.
+
+retweeted_status_entities_user_mentions_id_str = Contains the id_str of the users mentioned that were not cut off from truncation.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+ReTweet is when you share a tweet without adding any comment or words to the actual tweet. Hence, keeping the original tweet and concept tweeted by the user. On the other hand, the re-sharing of the tweet with an added comment is called Quote Tweet.
+
+quoted_status_text = Contains the original text that was quoted.
+
+quoted_status_truncated = True = shortened/cut off, False = not shortened/not cut off.
+
+quoted_status_user_id_str = This column contains the user_id_str of the user that the tweet was quoted from.
+
+quoted_status_user_screen_name = This column contains the screen name of the user that the tweet was quoted from.
+
+quoted_status_user_description = This column contains the profile description of the user that the text was quoted from.
+
+quoted_status_user_verified = This column contains the status of if the user whos text was quoted is verified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
