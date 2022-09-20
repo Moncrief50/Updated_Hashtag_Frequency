@@ -108,8 +108,9 @@ data$hashtags <- sub("[A-Z/]+$", "", data$hashtags)
 data$hashtags <- sub("^[A-Z]", "", data$hashtags)
 
 data$hashtags <- sub("^[A-Z]", "", data$hashtags)
-#removing any character that is not in the english alphabet
+#removing any word that is not atleast 3 characters long
 data$hashtags <- gsub('\\b\\w{1,2}\\b','', data$hashtags)
+#removing any character that is not in the english alphabet
 data$hashtags <- str_remove_all(data$hashtags, "[^[\\da-zA-Z ]]")
 
 #creating a count table in decreaing order of the hashtags
