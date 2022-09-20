@@ -1,0 +1,83 @@
+created_at
+id_str
+text
+truncated
+in_reply_to_status_id_str
+in_reply_to_user_id_str
+user
+	id_str
+	screen_name
+	description
+	verified
+	followers_count
+	friends_count
+	favourites_count
+	statuses_count
+	created_at
+extended_tweet
+	full_text
+	entities
+		hashtags
+	user_mentions
+		screen_name
+		id_str
+entities
+	hashtags
+	user_mentions
+		screen_name
+		id_str
+retweeted_status
+	created_at
+	id_str
+	text
+	truncated
+	in_reply_to_status_id_str
+	in_reply_to_user_id_str
+	user
+		id_str
+		screen_name
+		description
+		verified
+		followers_count
+		friends_count
+		favourites_count
+		statuses_count
+		created_at
+	extended_tweet
+		full_text
+		entities
+			hashtags
+		user_mentions
+			screen_name
+			id_str
+	entities
+		hashtags
+		user_mentions
+			screen_name
+			id_str
+quoted_status
+	text
+	truncated
+	user
+		id_str
+		screen_name
+		description
+		verified
+		followers_count
+		friends_count
+		favourites_count
+		statuses_count
+		created_at
+	extended_tweet
+		full_text
+		entities
+			hashtags
+			user_mentions
+				screen_name
+				id_str
+	entities
+		hashtags
+		user_mentions
+			screen_name
+			id_str
+	
