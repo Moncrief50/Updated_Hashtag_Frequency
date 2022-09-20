@@ -96,7 +96,7 @@ data <- data.frame(lapply(hashtags_df, function(x) {gsub("[[']", '', x) %>% gsub
 data <- data %>% unite(., 'tweets', c('tweet', 'retweet', 'quote'), sep=', ')
 data <- data %>% transmute(tweets = strsplit(as.character(tweets), ',')) %>% unnest(tweets)
 data <- data[!(data == ' ' | data == '')]
-#Removing all punctuation
+#Removing all punctuation, removing whitespace etc.
 data <- data %>% str_replace_all('[[:punct:]]', '') %>%
   str_replace_all(' ', '') %>% trimws() %>% as.data.frame()
 
