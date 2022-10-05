@@ -1,0 +1,199 @@
+---
+title: "Dataset_Comparison"
+author: "Robert Moncrief"
+date: "10/4/2022"
+output: html_document
+---
+
+## R Markdown
+
+```{r}
+setwd("/Users/robertmoncrief/Documents/Twitter Data 2020/x2go")
+
+library(ggplot2)
+library(arsenal)
+library(gridExtra)
+library(sqldf)
+library(stringr)
+library(dplyr)
+
+```
+
+## Reading in datasets
+
+```{r echo=TRUE}
+
+#Reading in the old datasets
+marchOld <- read.csv("Old_Hashtags/March2.csv")
+marchOld$hashtags <- str_to_lower(marchOld$hashtags)
+marchOld <- marchOld[,-1]
+
+aprilOld <- read.csv("Old_Hashtags/April2.csv")
+aprilOld$hashtags <- str_to_lower(aprilOld$hashtags)
+aprilOld <- aprilOld[,-1]
+
+mayOld <- read.csv("Old_Hashtags/May2.csv")
+mayOld$hashtags <- str_to_lower(mayOld$hashtags)
+mayOld <- mayOld[,-1]
+
+juneOld <- read.csv("Old_Hashtags/June2.csv")
+juneOld$hashtags <- str_to_lower(juneOld$hashtags)
+juneOld <- juneOld[,-1]
+
+julyOld <- read.csv("Old_Hashtags/July2.csv")
+julyOld$hashtags <- str_to_lower(julyOld$hashtags)
+julyOld <- julyOld[,-1]
+
+augustOld <- read.csv("Old_Hashtags/August2.csv")
+augustOld$hashtags <- str_to_lower(augustOld$hashtags)
+augustOld <- augustOld[,-1]
+
+
+#Reading in the new datasets
+march <- read.csv("New_Hashtags/March.csv")
+march$Hashtags <- str_to_lower(march$Hashtags)
+march <- march[,-1]
+
+april <- read.csv("New_Hashtags/April.csv")
+april$Hashtags <- str_to_lower(april$Hashtags)
+april <- april[,-1]
+
+may <- read.csv("New_Hashtags/May.csv")
+may$Hashtags <- str_to_lower(may$Hashtags)
+may <- may[,-1]
+
+june <- read.csv("New_Hashtags/June.csv")
+june$Hashtags <- str_to_lower(june$Hashtags)
+june <- june[,-1]
+
+july <- read.csv("New_Hashtags/July.csv")
+july$Hashtags <- str_to_lower(july$Hashtags)
+july <- july[,-1]
+
+august <- read.csv("New_Hashtags/August.csv")
+august$Hashtags <- str_to_lower(august$Hashtags)
+august <- august[,-1]
+
+march <- read.csv("New_Hashtags/March_df_2.csv")
+march$Hashtags <- str_to_lower(march$Hashtags)
+march <- march[,-1]
+
+april <- read.csv("New_Hashtags/April_df_2.csv")
+april$Hashtags <- str_to_lower(april$Hashtags)
+april <- april[,-1]
+
+may <- read.csv("New_Hashtags/May_df_2.csv")
+may$Hashtags <- str_to_lower(may$Hashtags)
+may <- may[,-1]
+
+june <- read.csv("New_Hashtags/June_df_2.csv")
+june$Hashtags <- str_to_lower(june$Hashtags)
+june <- june[,-1]
+
+july <- read.csv("New_Hashtags/July_df_2.csv")
+july$Hashtags <- str_to_lower(july$Hashtags)
+july <- july[,-1]
+
+august <- read.csv("New_Hashtags/August_df_2.csv")
+august$Hashtags <- str_to_lower(august$Hashtags)
+august <- august[,-1]
+
+```
+
+## Cleaning Dataframes for analysis
+
+```{r echo=TRUE}
+
+#Deleteing excess words
+marchOld <- marchOld[-1001,]
+aprilOld <- aprilOld[-1001,]
+mayOld <- mayOld[-1001,]
+juneOld <- juneOld[-1001,]
+julyOld <- julyOld[-1001,]
+augustOld <- augustOld[-1001,]
+
+march <- march[-1001:-1009,]
+april <- april[-1001:-1009,]
+may <- may[-1001:-1009,]
+june <- june[-1001:-1009,]
+july <- july[-1001:-1009,]
+august <- august[-1001:-1009,]
+
+#Making sure each dataset is a dataframe
+colnames(marchOld) <- c("Hashtags", "Freq", "Count")
+colnames(aprilOld) <- c("Hashtags", "Freq", "Count")
+colnames(mayOld) <- c("Hashtags", "Freq", "Count")
+colnames(juneOld) <- c("Hashtags", "Freq", "Count")
+colnames(julyOld) <- c("Hashtags", "Freq", "Count")
+colnames(augustOld) <- c("Hashtags", "Freq", "Count")
+
+New_Data <- rbind(march, april, may, june, july, august)
+New_Data %>%
+  group_by(Hashtags) %>%
+  summarise_all(sum) %>%
+  data.frame() -> New_Data
+New_Data <- New_Data[order(New_Data$Count, decreasing = TRUE), ]
+
+Old_Data <- rbind(marchOld, aprilOld, mayOld, juneOld, julyOld, augustOld)
+Old_Data %>%
+  group_by(Hashtags) %>%
+  summarise_all(sum) %>%
+  data.frame() -> Old_Data
+Old_Data <- Old_Data[order(Old_Data$Count, decreasing = TRUE), ]
+
+compare_data <- rbind(Old_Data, New_Data)
+compare_data %>%
+  group_by(Hashtags) %>%
+  summarise_all(sum) %>%
+  data.frame() -> compare_Data
+compare_Data <- compare_Data[order(compare_Data$Count, decreasing = TRUE), ]
+
+```
+
+## Creating Graphs (Blue = OldData, Red = NewData)
+
+```{r echo=TRUE}
+#Creating a dot plot
+dot_plot <- ggplot(Old_Data, aes(Freq, Count)) + geom_point(colour = "blue")  + geom_point(data=New_Data, colour = 'red', alpha = 0.4) +
+  labs(title = "hashtag count/frequency dot-plot comparison") + geom_smooth(stat = "smooth", position = "identity", data = compare_data, aes(x = Freq, y = Count), se = F, colour = "green")
+dot_plot
+
+#Creating a Bar graph
+Bar_Graph <- ggplot(Old_Data, aes(Freq, Count)) + geom_col(colour = 'blue', show.legend = TRUE, position = "identity", width = 0.000011) + geom_col(data = New_Data, fill = NA, colour = 'red', show.legend =  TRUE, position = "identity", width = 0.0000000000001, alpha = 0.4) +
+  labs(title = "hashtag count/frequency bar-graph comparison") + geom_smooth(stat = "smooth", position = "identity", method = "lm", data= compare_data, aes(x = Freq, y = Count), se = F, colour = "green")
+Bar_Graph
+
+
+hashtags <- ggplot(Old_Data[1:30,], aes(Hashtags, Count, group = 1)) + geom_line(color = 'blue') + geom_point(color = 'blue') + geom_line(data = New_Data[1:30,], colour = 'red') + geom_point(data = New_Data[1:30,], colour = 'red') +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  labs(title = "Old vs New Data hashtag Comparison",
+       x = 'Hashtags',
+       y = 'Count')
+hashtags
+
+hashtags2 <- ggplot(Old_Data[30:60,], aes(Hashtags, Count, group = 1)) + geom_line(color = 'blue') + geom_point(color = 'blue') + geom_line(data = New_Data[30:60,], colour = 'red') + geom_point(data = New_Data[30:60,], colour = 'red') +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  labs(title = "Old vs New Data hashtag Comparison",
+       x = 'Hashtags',
+       y = 'Count')
+hashtags2
+```
+
+## Further Comparison
+```{r echo=TRUE}
+#File that contains the hashtags in the old data that were not in the new data.
+OldData_NotinNewData <- subset(Old_Data, !(Hashtags %in% New_Data$Hashtags))
+OldData_NotinNewData[1:10,]
+write.csv(OldData_NotinNewData, "/Users/robertmoncrief/Documents/Twitter Data 2020/x2go/New_Hashtags/OldData_NotinNewData.csv")
+
+#File that contains the hashtags in the new data that were not in the old data.
+NewData_NotinOldData <- subset(New_Data, !(Hashtags %in% Old_Data$Hashtags))
+NewData_NotinOldData[1:10,]
+write.csv(NewData_NotinOldData, "/Users/robertmoncrief/Documents/Twitter Data 2020/x2go/New_Hashtags/NewData_NotinOldData.csv")
+
+#This section is very long but I though it might be helpful
+#The comparedf() Function is useful to see quick comparisons between two dataframes
+head(summary(comparedf(New_Data, Old_Data, by = "Count")))
+```
+
+
